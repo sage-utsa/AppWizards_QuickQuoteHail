@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<!--
+    AndroidManifest.xml
+    This file tells Android how to launch your app and what components (activities, services, etc.) exist.
+-->
 
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.AppWizards.QuickQuoteHail">
+
+    <!--
+        The <application> tag wraps all app components.
+        You define your theme, icon, and the screens (activities) here.
+    -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,14 +21,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppWizards_QuickQuoteHail">
+
+        <!--
+            Main launch screen (LoginActivity)
+            This is the first screen the user sees when they open the app.
+        -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
+
+            <!-- Tells Android this activity is the entry point (app launcher) -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--
+            RegisterActivity
+            This is the screen users go to when they want to create a new account.
+            We need to declare it so Android knows it exists.
+        -->
+        <activity android:name=".RegisterActivity" />
+
     </application>
 
 </manifest>

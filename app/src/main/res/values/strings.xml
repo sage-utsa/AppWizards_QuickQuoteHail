@@ -1,4 +1,6 @@
 <resources>
+
+    <!-- App-level strings -->
     <string name="app_name">AppWizards_QuickQuoteHail</string>
     <string name="app_logo_desc">App logo</string>
 
@@ -6,5 +8,16 @@
     <string name="hint_email">Email Address</string>
     <string name="hint_password">Password</string>
     <string name="button_login">Log In</string>
-    <string name="signup_prompt">Don’t have an account? Sign up</string>
+
+    <!-- Signup prompt with styled "Sign up here" -->
+    <string name="signup_prompt">
+    Need an account? <font color="#00FFE8"><u>Sign Up.</u></font>
+    </string>
+
+    <string name="login_prompt">
+    <font color="#FFFFFF">Already have an account? </font><font color="#00FFE8"><u>Log in.</u></font>
+    </string>
+
+
+
 </resources>
