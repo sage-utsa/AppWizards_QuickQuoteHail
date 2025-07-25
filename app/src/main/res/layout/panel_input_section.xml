@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/input_background"
+    android:layout_marginBottom="16dp">
+
+    <TextView
+        android:id="@+id/selectedPanelDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selected Panel: HOOD"
+        android:textColor="#00FFE8"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/dentSizeDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Largest Dent Size: Not Set"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/selectDentSizeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Largest Dent Size"
+        android:background="@drawable/button_background"
+        android:textColor="#00FFE8"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/numDentsDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Number of Dents: Not Set"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/enterNumDentsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Number of Dents"
+        android:background="@drawable/button_background"
+        android:textColor="#00FFE8"
+        android:layout_marginBottom="16dp"/>
+
+    <Switch
+        android:id="@+id/aluminumSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aluminum Panel"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/panelEstimatedCostDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estimated Cost: N/A"
+        android:textColor="#00FFE8"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"/>
+
+</LinearLayout>

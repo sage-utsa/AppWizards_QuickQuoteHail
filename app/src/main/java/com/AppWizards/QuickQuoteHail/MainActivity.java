@@ -1,25 +1,31 @@
 package com.AppWizards.QuickQuoteHail;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        //setContentView(R.layout.login_screen);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        Button calculateVehicleButton = findViewById(R.id.calculateVehicleButton);
+        Button historyButton = findViewById(R.id.historyButton);
+
+        // Set up listener for "Calculate Vehicle" button
+        calculateVehicleButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ActivityCalculator.class);
+            startActivity(intent);
+        });
+
+        // Set up listener for "History" button
+        historyButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ActivityInvoice.class);
+            startActivity(intent);
         });
     }
 }

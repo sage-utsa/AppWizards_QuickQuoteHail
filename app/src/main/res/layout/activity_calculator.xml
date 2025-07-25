@@ -1,13 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    tools:context=".ActivityCalculator">
 
-    <Spinner
-        android:id="@+id/spinner"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="198dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/calculatorTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dent Repair Calculator"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"/>
+
+        <TextView
+            android:id="@+id/panelTypeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Panel Type:"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/panelSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/input_background"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp"/>
+
+        <LinearLayout
+            android:id="@+id/dynamicPanelsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <Button
+            android:id="@+id/calculateAllCostsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calculate All Costs"
+            android:background="@drawable/button_background"
+            android:textColor="#00FFE8"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/totalEstimatedCostDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Estimated Cost: N/A"
+            android:textColor="#00FFE8"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"/>
+
+    </LinearLayout>
+</ScrollView>

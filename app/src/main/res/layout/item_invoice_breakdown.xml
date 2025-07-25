@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/input_background"> <!-- Reusing input_background for item styling -->
+
+    <TextView
+        android:id="@+id/invoiceDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date: MMM DD, YYYY HH:MM"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/invoicePanelType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Panel: HOOD"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/invoiceDentDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dents: 15 (Q)"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/invoiceAluminumStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aluminum: Yes"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/invoiceCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cost: $XXX.XX"
+        android:textColor="#00FFE8"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>
