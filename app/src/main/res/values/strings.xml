@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AppWizards_QuickQuoteHail</string>
+    <string name="app_logo_desc">App logo</string>
+
+    <!-- Login screen strings -->
+    <string name="hint_email">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="button_login">Log In</string>
+    <string name="signup_prompt">Don’t have an account? Sign up</string>
+</resources>
