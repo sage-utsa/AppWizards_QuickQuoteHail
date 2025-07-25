@@ -20,4 +20,3 @@ An Android app to help hail damage repair technicians quickly estimate vehicle d
 - Justice
 - Khristian
 - Sage (@sage-utsa)
-- test
