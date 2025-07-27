@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    AndroidManifest.xml
-    This file tells Android how to launch your app and what components (activities, services, etc.) exist.
--->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.AppWizards.QuickQuoteHail">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!--
-        The <application> tag wraps all app components.
-        You define your theme, icon, and the screens (activities) here.
-    -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,42 +10,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppWizards_QuickQuoteHail"> <!-- Corrected theme name -->
+        android:theme="@style/Theme.AppWizards_QuickQuoteHail"
+        tools:targetApi="31">
 
-        <!--
-            Main Activity (New Launcher Screen)
-            This is the first screen the user sees when they open the app.
-        -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
-            <!-- Tells Android this activity is the entry point (app launcher) -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- LoginActivity (no longer the launcher by default) -->
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" /> <!-- Set to false as it's not a direct launcher anymore -->
+        <activity android:name=".RegisterActivity" />
 
-        <!-- RegisterActivity -->
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
+        <activity android:name=".MainActivity" />
 
-        <!-- ActivityCalculator -->
-        <activity
-            android:name=".ActivityCalculator"
-            android:exported="false" />
+        <activity android:name=".ActivityCalculator" />
 
-        <!-- ActivityInvoice (History Screen) -->
-        <activity
-            android:name=".ActivityInvoice"
-            android:exported="false" />
+        <activity android:name=".ActivityInvoice" />
 
     </application>
-
 </manifest>

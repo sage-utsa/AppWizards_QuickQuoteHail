@@ -103,7 +103,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (matchFound) {
                     Toast.makeText(LoginActivity.this,
                             "Login successful!", Toast.LENGTH_SHORT).show();
-                    // TODO: Navigate to dashboard or main screen
+                    // Navigate to MainActivity
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish(); // This closes LoginActivity, preventing back navigation to it.
                 } else {
                     Toast.makeText(LoginActivity.this,
                             "Invalid email or password.", Toast.LENGTH_SHORT).show();
