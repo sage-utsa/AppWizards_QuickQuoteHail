@@ -34,8 +34,21 @@ public class PdfGenerator {
         int x = 40;
         int y = 50;
         int lineHeight = 25;
+        int rowHeight = 30;
+        int tableRight = pageInfo.getPageWidth() - x;
 
-        // === Draw logo at the top ===
+        // === Watermark logo (centered, transparent) ===
+        Bitmap watermark = BitmapFactory.decodeResource(context.getResources(), R.drawable.app_logo);
+        if (watermark != null) {
+            int wmWidth = 300;
+            int wmHeight = (int) ((float) watermark.getHeight() / watermark.getWidth() * wmWidth);
+            Bitmap scaledWatermark = Bitmap.createScaledBitmap(watermark, wmWidth, wmHeight, true);
+            Paint watermarkPaint = new Paint();
+            watermarkPaint.setAlpha(40);
+            canvas.drawBitmap(scaledWatermark, (pageInfo.getPageWidth() - wmWidth) / 2f, (pageInfo.getPageHeight() - wmHeight) / 2f, watermarkPaint);
+        }
+
+        // === Draw logo at top ===
         Bitmap logo = BitmapFactory.decodeResource(context.getResources(), R.drawable.app_logo);
         if (logo != null) {
             int logoWidth = 100;
@@ -52,92 +65,86 @@ public class PdfGenerator {
         canvas.drawText("QuickQuoteHail - Invoice Summary", x, y, paint);
         y += lineHeight * 2;
 
-        // === Customer info ===
+        // === Customer Info ===
         paint.setTextSize(16);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTypeface(Typeface.DEFAULT);
         canvas.drawText("Customer: " + summary.getCustomerName(), x, y, paint);
         y += lineHeight;
         canvas.drawText("VIN: " + summary.getCustomerVIN(), x, y, paint);
+        y += lineHeight;
+        canvas.drawText("Date of Estimate: " + (summary.getInvoices().isEmpty() ? "N/A" : summary.getInvoices().get(0).getFormattedDate()), x, y, paint);
         y += lineHeight * 2;
 
-        // === Total cost header ===
-        paint.setTextSize(18);
-        paint.setColor(Color.BLUE);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        canvas.drawText(String.format(Locale.getDefault(), "Total Estimated Cost: $%.2f", summary.getTotalCost()), x, y, paint);
-        y += lineHeight * 2;
-
-        // === Table Header ===
+        // === Table Headers ===
         paint.setTextSize(16);
         paint.setColor(Color.DKGRAY);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        canvas.drawText("Date", x, y, paint);
-        canvas.drawText("Panel", x + 120, y, paint);
-        canvas.drawText("Dents", x + 220, y, paint);
-        canvas.drawText("Alum.", x + 320, y, paint);
-        canvas.drawText("Cost", x + 420, y, paint);
-        y += lineHeight;
+        paint.setTypeface(Typeface.DEFAULT_BOLD);
+        canvas.drawText("Panel", x, y, paint);
+        canvas.drawText("Dents", x + 120, y, paint);
+        canvas.drawText("Alum.", x + 240, y, paint);
+        canvas.drawText("Cost", x + 360, y, paint);
+        y += rowHeight;
 
-        // === Divider line ===
-        paint.setColor(Color.BLACK);
-        canvas.drawLine(x, y, pageInfo.getPageWidth() - x, y, paint);
-        y += lineHeight / 2;
-
-        // === Table Rows ===
+        // === Table Content ===
+        paint.setTypeface(Typeface.DEFAULT);
         paint.setTextSize(14);
-        paint.setColor(Color.BLACK);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
 
         double totalCost = 0.0;
+        boolean alternateRow = false;
 
         for (Invoice invoice : summary.getInvoices()) {
-            if (y + lineHeight * 3 > pageInfo.getPageHeight() - 50) {
+            if (y + rowHeight > pageInfo.getPageHeight() - 100) {
                 document.finishPage(page);
-                pageInfo = new PdfDocument.PageInfo.Builder(595, 842, 1).create();
                 page = document.startPage(pageInfo);
                 canvas = page.getCanvas();
                 y = 50;
-
-                paint.setTextSize(16);
-                paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-                canvas.drawText("Invoices (continued)", x, y, paint);
-                y += lineHeight;
             }
 
             double cost = 0.0;
             try {
-                cost = Double.parseDouble(invoice.getEstimatedCost());
+                cost = Double.parseDouble(invoice.getEstimatedCost().replace("$", ""));
             } catch (NumberFormatException e) {
                 Log.e(TAG, "Invalid cost format: " + invoice.getEstimatedCost());
             }
             totalCost += cost;
 
-            canvas.drawText(invoice.getFormattedDate(), x, y, paint);
-            canvas.drawText(invoice.getPanelType(), x + 120, y, paint);
-            canvas.drawText(invoice.getNumberOfDents() + " (" + invoice.getLargestDentSize() + ")", x + 220, y, paint);
-            canvas.drawText(invoice.isAluminum() ? "Yes" : "No", x + 320, y, paint);
-            canvas.drawText(String.format(Locale.getDefault(), "$%.2f", cost), x + 420, y, paint);
-            y += lineHeight;
+            // === Row background ===
+            paint.setColor(alternateRow ? Color.parseColor("#F8F8F8") : Color.WHITE);
+            canvas.drawRect(x, y - rowHeight + 10, tableRight, y + 10, paint);
 
-            // === Light divider ===
-            paint.setColor(Color.LTGRAY);
-            canvas.drawLine(x, y, pageInfo.getPageWidth() - x, y, paint);
+            // === Row text ===
             paint.setColor(Color.BLACK);
-            y += 5;
+            canvas.drawText(invoice.getPanelType(), x, y, paint);
+            canvas.drawText(invoice.getNumberOfDents() + " (" + invoice.getLargestDentSize() + ")", x + 120, y, paint);
+            canvas.drawText(invoice.isAluminum() ? "Yes" : "No", x + 240, y, paint);
+            canvas.drawText(String.format(Locale.getDefault(), "$%.2f", cost), x + 360, y, paint);
+
+            // === Row border ===
+            paint.setColor(Color.LTGRAY);
+            canvas.drawLine(x, y + 5, tableRight, y + 5, paint);
+
+            y += rowHeight;
+            alternateRow = !alternateRow;
         }
 
-        // === Summary Footer ===
+        // === Summary with Tax ===
         y += lineHeight;
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        double taxRate = 0.0825;
+        double taxAmount = totalCost * taxRate;
+        double grandTotal = totalCost + taxAmount;
+
+        paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setColor(Color.DKGRAY);
         canvas.drawText("Summary", x, y, paint);
         y += lineHeight;
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+
+        paint.setTypeface(Typeface.DEFAULT);
+        paint.setColor(Color.BLACK);
         canvas.drawText(String.format(Locale.getDefault(), "Subtotal: $%.2f", totalCost), x, y, paint);
         y += lineHeight;
-        canvas.drawText("Tax (0%): $0.00", x, y, paint);
+        canvas.drawText(String.format(Locale.getDefault(), "Tax (8.25%%): $%.2f", taxAmount), x, y, paint);
         y += lineHeight;
-        canvas.drawText(String.format(Locale.getDefault(), "Total: $%.2f", totalCost), x, y, paint);
+        canvas.drawText(String.format(Locale.getDefault(), "Total: $%.2f", grandTotal), x, y, paint);
 
         document.finishPage(page);
 
