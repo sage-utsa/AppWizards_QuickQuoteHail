@@ -66,6 +66,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Password visibility eye
+
     <!-- Log In button -->
     <Button
         android:id="@+id/loginButton"
