@@ -1,6 +1,8 @@
 package com.AppWizards.QuickQuoteHail;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,38 +21,38 @@ import java.util.Locale;
 
 public class PdfGenerator {
 
-    // Used for logging errors or messages
     private static final String TAG = "PdfGenerator";
-
-    // This must match the FileProvider authority in AndroidManifest.xml
     private static final String FILE_AUTHORITY_SUFFIX = ".fileprovider";
 
-    // This method creates a PDF invoice and returns the file as a URI so it can be shared
     public static Uri generateInvoicePdf(Context context, CustomerInvoiceSummary summary) {
-        // Create a new blank PDF document
         PdfDocument document = new PdfDocument();
-
-        // Define the size of the PDF page (A4 size)
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(595, 842, 1).create();
         PdfDocument.Page page = document.startPage(pageInfo);
-
-        // Canvas is like a blank piece of paper we draw on
         Canvas canvas = page.getCanvas();
         Paint paint = new Paint();
 
-        // x and y are the starting positions for drawing text
         int x = 40;
         int y = 50;
-        int lineHeight = 25; // space between lines
+        int lineHeight = 25;
 
-        // ===== Title =====
+        // === Draw logo at the top ===
+        Bitmap logo = BitmapFactory.decodeResource(context.getResources(), R.drawable.app_logo);
+        if (logo != null) {
+            int logoWidth = 100;
+            int logoHeight = (int) ((float) logo.getHeight() / logo.getWidth() * logoWidth);
+            Bitmap scaledLogo = Bitmap.createScaledBitmap(logo, logoWidth, logoHeight, true);
+            canvas.drawBitmap(scaledLogo, x, y, paint);
+            y += logoHeight + lineHeight;
+        }
+
+        // === Title ===
         paint.setTextSize(24);
         paint.setColor(Color.BLACK);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         canvas.drawText("QuickQuoteHail - Invoice Summary", x, y, paint);
         y += lineHeight * 2;
 
-        // ===== Customer Info =====
+        // === Customer info ===
         paint.setTextSize(16);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         canvas.drawText("Customer: " + summary.getCustomerName(), x, y, paint);
@@ -58,81 +60,103 @@ public class PdfGenerator {
         canvas.drawText("VIN: " + summary.getCustomerVIN(), x, y, paint);
         y += lineHeight * 2;
 
-        // ===== Total Cost =====
+        // === Total cost header ===
         paint.setTextSize(18);
-        paint.setColor(Color.BLUE); // Use blue to highlight the total
+        paint.setColor(Color.BLUE);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        canvas.drawText(String.format("Total Estimated Cost: $%.2f", summary.getTotalCost()), x, y, paint);
+        canvas.drawText(String.format(Locale.getDefault(), "Total Estimated Cost: $%.2f", summary.getTotalCost()), x, y, paint);
         y += lineHeight * 2;
 
-        // ===== Invoices Header =====
+        // === Table Header ===
         paint.setTextSize(16);
         paint.setColor(Color.DKGRAY);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        canvas.drawText("Invoices", x, y, paint);
+        canvas.drawText("Date", x, y, paint);
+        canvas.drawText("Panel", x + 120, y, paint);
+        canvas.drawText("Dents", x + 220, y, paint);
+        canvas.drawText("Alum.", x + 320, y, paint);
+        canvas.drawText("Cost", x + 420, y, paint);
         y += lineHeight;
 
-        // ===== Loop through each invoice and draw it =====
+        // === Divider line ===
+        paint.setColor(Color.BLACK);
+        canvas.drawLine(x, y, pageInfo.getPageWidth() - x, y, paint);
+        y += lineHeight / 2;
+
+        // === Table Rows ===
         paint.setTextSize(14);
         paint.setColor(Color.BLACK);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
 
+        double totalCost = 0.0;
+
         for (Invoice invoice : summary.getInvoices()) {
-            // If we get near the bottom of the page, start a new one
-            if (y + lineHeight * 6 > pageInfo.getPageHeight() - 50) {
+            if (y + lineHeight * 3 > pageInfo.getPageHeight() - 50) {
                 document.finishPage(page);
                 pageInfo = new PdfDocument.PageInfo.Builder(595, 842, 1).create();
                 page = document.startPage(pageInfo);
                 canvas = page.getCanvas();
-                y = 50; // reset y position
+                y = 50;
 
-                // Add a continued header
                 paint.setTextSize(16);
                 paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                 canvas.drawText("Invoices (continued)", x, y, paint);
                 y += lineHeight;
-                paint.setTextSize(14);
-                paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
             }
 
-            // Draw each invoice's details line by line
-            canvas.drawText("Date: " + invoice.getFormattedDate(), x, y, paint); y += lineHeight;
-            canvas.drawText("Panel: " + invoice.getPanelType(), x, y, paint); y += lineHeight;
-            canvas.drawText("Dents: " + invoice.getNumberOfDents() + " (" + invoice.getLargestDentSize() + ")", x, y, paint); y += lineHeight;
-            canvas.drawText("Aluminum: " + (invoice.isAluminum() ? "Yes" : "No"), x, y, paint); y += lineHeight;
-            canvas.drawText(String.format("Estimated Cost: $%.2f", invoice.getEstimatedCost()), x, y, paint); y += lineHeight;
+            double cost = 0.0;
+            try {
+                cost = Double.parseDouble(invoice.getEstimatedCost());
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "Invalid cost format: " + invoice.getEstimatedCost());
+            }
+            totalCost += cost;
 
-            // Add a light gray line between invoices for readability
+            canvas.drawText(invoice.getFormattedDate(), x, y, paint);
+            canvas.drawText(invoice.getPanelType(), x + 120, y, paint);
+            canvas.drawText(invoice.getNumberOfDents() + " (" + invoice.getLargestDentSize() + ")", x + 220, y, paint);
+            canvas.drawText(invoice.isAluminum() ? "Yes" : "No", x + 320, y, paint);
+            canvas.drawText(String.format(Locale.getDefault(), "$%.2f", cost), x + 420, y, paint);
+            y += lineHeight;
+
+            // === Light divider ===
             paint.setColor(Color.LTGRAY);
             canvas.drawLine(x, y, pageInfo.getPageWidth() - x, y, paint);
-            paint.setColor(Color.BLACK); // Reset color for next invoice
-            y += lineHeight;
+            paint.setColor(Color.BLACK);
+            y += 5;
         }
 
-        // Finish writing the last page
+        // === Summary Footer ===
+        y += lineHeight;
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        paint.setColor(Color.DKGRAY);
+        canvas.drawText("Summary", x, y, paint);
+        y += lineHeight;
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        canvas.drawText(String.format(Locale.getDefault(), "Subtotal: $%.2f", totalCost), x, y, paint);
+        y += lineHeight;
+        canvas.drawText("Tax (0%): $0.00", x, y, paint);
+        y += lineHeight;
+        canvas.drawText(String.format(Locale.getDefault(), "Total: $%.2f", totalCost), x, y, paint);
+
         document.finishPage(page);
 
-        // Save the PDF as a file and return its URI
-        File pdfFile = null;
+        File pdfFile;
         try {
-            // Save to internal storage in a folder called "invoices"
             File filesDir = new File(context.getFilesDir(), "invoices");
-            if (!filesDir.exists()) {
-                filesDir.mkdirs();
+            if (!filesDir.exists() && !filesDir.mkdirs()) {
+                Log.e(TAG, "Failed to create invoice directory");
             }
 
-            // Create a unique file name using customer name and timestamp
             String fileName = "Invoice_" + summary.getCustomerName().replace(" ", "_") + "_" +
                     new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis()) + ".pdf";
             pdfFile = new File(filesDir, fileName);
 
-            // Write the PDF to the file
             FileOutputStream fos = new FileOutputStream(pdfFile);
             document.writeTo(fos);
             fos.close();
             Log.d(TAG, "PDF generated successfully: " + pdfFile.getAbsolutePath());
 
-            // Return a URI for the PDF so it can be shared or emailed
             return FileProvider.getUriForFile(context, context.getPackageName() + FILE_AUTHORITY_SUFFIX, pdfFile);
 
         } catch (IOException e) {
