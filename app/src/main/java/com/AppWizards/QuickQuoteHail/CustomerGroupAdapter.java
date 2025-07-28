@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button; // Import Button
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast; // For testing purposes
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,10 +19,18 @@ import java.util.List;
 public class CustomerGroupAdapter extends ArrayAdapter<CustomerInvoiceSummary> {
 
     private LayoutInflater inflater;
+    private OnEmailInvoiceClickListener emailClickListener; // New listener interface
 
-    public CustomerGroupAdapter(@NonNull Context context, @NonNull List<CustomerInvoiceSummary> summaries) {
+    // Define an interface for click events
+    public interface OnEmailInvoiceClickListener {
+        void onEmailInvoiceClick(CustomerInvoiceSummary summary);
+    }
+
+    // Modify constructor to accept the listener
+    public CustomerGroupAdapter(@NonNull Context context, @NonNull List<CustomerInvoiceSummary> summaries, OnEmailInvoiceClickListener listener) {
         super(context, 0, summaries);
         inflater = LayoutInflater.from(context);
+        this.emailClickListener = listener; // Assign the listener
     }
 
     @NonNull
@@ -35,6 +45,7 @@ public class CustomerGroupAdapter extends ArrayAdapter<CustomerInvoiceSummary> {
             holder.customerVinHeader = convertView.findViewById(R.id.customerVinHeader);
             holder.customerTotalCostHeader = convertView.findViewById(R.id.customerTotalCostHeader);
             holder.individualInvoicesContainer = convertView.findViewById(R.id.individualInvoicesContainer);
+            holder.emailButton = convertView.findViewById(R.id.emailCustomerInvoiceButton); // Find the new button
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -48,12 +59,18 @@ public class CustomerGroupAdapter extends ArrayAdapter<CustomerInvoiceSummary> {
             holder.customerVinHeader.setText("VIN: " + currentSummary.getCustomerVIN());
             holder.customerTotalCostHeader.setText(String.format("Total for Customer: $%.2f", currentSummary.getTotalCost()));
 
+            // Set OnClickListener for the email button
+            holder.emailButton.setOnClickListener(v -> {
+                if (emailClickListener != null) {
+                    emailClickListener.onEmailInvoiceClick(currentSummary);
+                }
+            });
+
             // Clear previous invoice views to prevent duplicates due to recycling
             holder.individualInvoicesContainer.removeAllViews();
 
             // Add individual invoice details
             for (Invoice invoice : currentSummary.getInvoices()) {
-                // Dynamically create TextViews or inflate a smaller layout for each invoice
                 LinearLayout invoiceItemView = (LinearLayout) inflater.inflate(R.layout.single_invoice_detail_item, holder.individualInvoicesContainer, false);
 
                 TextView dateTextView = invoiceItemView.findViewById(R.id.detailDate);
@@ -79,6 +96,7 @@ public class CustomerGroupAdapter extends ArrayAdapter<CustomerInvoiceSummary> {
         TextView customerNameHeader;
         TextView customerVinHeader;
         TextView customerTotalCostHeader;
-        LinearLayout individualInvoicesContainer; // The container for dynamically added invoice views
+        LinearLayout individualInvoicesContainer;
+        Button emailButton; // Add the button here
     }
 }

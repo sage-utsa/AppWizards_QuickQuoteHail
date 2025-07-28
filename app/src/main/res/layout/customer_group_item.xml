@@ -5,39 +5,59 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_marginBottom="16dp"
-    android:background="@drawable/input_background"> <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="8dp"
-    android:background="#2E3B4E"> <TextView
-    android:id="@+id/customerNameHeader"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Customer: John Doe"
-    android:textColor="#00FFE8"
-    android:textSize="20sp"
-    android:textStyle="bold"
-    android:layout_marginBottom="4dp"/>
+    android:background="@drawable/input_background">
 
-    <TextView
-        android:id="@+id/customerVinHeader"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="VIN: ABCDEF1234567890"
-        android:textColor="#CCCCCC"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp"/>
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:background="#2E3B4E">
 
-    <TextView
-        android:id="@+id/customerTotalCostHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total for Customer: $X.XX"
-        android:textColor="@android:color/holo_orange_light"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/customerNameHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer: John Doe"
+            android:textColor="#00FFE8"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/customerVinHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VIN: ABCDEF1234567890"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/customerTotalCostHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total for Customer: $X.XX"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/emailCustomerInvoiceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Email Invoice"
+            android:background="@drawable/button_background_green"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
