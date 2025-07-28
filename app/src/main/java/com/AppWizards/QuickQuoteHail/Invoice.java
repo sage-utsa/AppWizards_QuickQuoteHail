@@ -16,9 +16,8 @@ public class Invoice implements Serializable {
     private int numberOfDents;
     private boolean isAluminum;
     private String estimatedCost;
-    private long creationTimestamp; // This was added in the previous step
+    private long creationTimestamp; // Add this field
 
-    // THIS IS THE CONSTRUCTOR THAT ActivityCalculator IS TRYING TO CALL
     public Invoice(String customerName, String customerVIN, String panelType, String largestDentSize, int numberOfDents, boolean isAluminum, String estimatedCost) {
         this.customerName = customerName;
         this.customerVIN = customerVIN;
@@ -27,10 +26,10 @@ public class Invoice implements Serializable {
         this.numberOfDents = numberOfDents;
         this.isAluminum = isAluminum;
         this.estimatedCost = estimatedCost;
-        this.creationTimestamp = System.currentTimeMillis(); // Initialize timestamp here
+        this.creationTimestamp = System.currentTimeMillis(); // Initialize timestamp
     }
 
-    // Constructor to create an Invoice from a JSONObject (for loading, as discussed previously)
+    // Constructor for loading from JSON (ensure it handles creationTimestamp)
     public Invoice(JSONObject jsonObject) throws JSONException {
         this.customerName = jsonObject.getString("customerName");
         this.customerVIN = jsonObject.getString("customerVIN");
@@ -39,13 +38,10 @@ public class Invoice implements Serializable {
         this.numberOfDents = jsonObject.getInt("numberOfDents");
         this.isAluminum = jsonObject.getBoolean("isAluminum");
         this.estimatedCost = jsonObject.getString("estimatedCost");
-        // Ensure you handle the timestamp if it might be missing in old JSON data,
-        // or ensure your saving logic always includes it.
-        this.creationTimestamp = jsonObject.optLong("creationTimestamp", System.currentTimeMillis());
+        this.creationTimestamp = jsonObject.optLong("creationTimestamp", System.currentTimeMillis()); // Use optLong for backward compatibility
     }
 
-
-    // Getters
+    // Getters for all fields
     public String getCustomerName() { return customerName; }
     public String getCustomerVIN() { return customerVIN; }
     public String getPanelType() { return panelType; }
@@ -53,15 +49,20 @@ public class Invoice implements Serializable {
     public int getNumberOfDents() { return numberOfDents; }
     public boolean isAluminum() { return isAluminum; }
     public String getEstimatedCost() { return estimatedCost; }
+    public long getCreationTimestamp() { return creationTimestamp; } // New getter for timestamp
+
     public String getFormattedDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault());
         return sdf.format(new Date(creationTimestamp));
     }
+
+    // If getCalculatedCost() still returns the formatted string, keep it.
+    // If it's meant to return a double, parse it here. For now, matching your usage.
     public String getCalculatedCost() {
         return estimatedCost;
     }
 
-    // toJsonObject method
+    // toJsonObject method (ensure creationTimestamp is put)
     public JSONObject toJsonObject() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("customerName", customerName);
@@ -71,13 +72,12 @@ public class Invoice implements Serializable {
         jsonObject.put("numberOfDents", numberOfDents);
         jsonObject.put("isAluminum", isAluminum);
         jsonObject.put("estimatedCost", estimatedCost);
-        jsonObject.put("creationTimestamp", creationTimestamp);
+        jsonObject.put("creationTimestamp", creationTimestamp); // Save timestamp
         return jsonObject;
     }
 
     @Override
     public String toString() {
-        // ... (your existing toString)
         return "Invoice{" +
                 "customerName='" + customerName + '\'' +
                 ", customerVIN='" + customerVIN + '\'' +

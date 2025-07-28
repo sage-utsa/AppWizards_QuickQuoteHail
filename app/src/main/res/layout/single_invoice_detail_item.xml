@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:background="#1F2A38"> <TextView
+    android:id="@+id/detailDate"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#CCCCCC"
+    android:textSize="14sp"
+    android:text="Date: Jul 27, 2025 21:58" />
+
+    <TextView
+        android:id="@+id/detailPanelType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="2dp"
+        android:text="Panel: HOOD" />
+
+    <TextView
+        android:id="@+id/detailDentDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#CCCCCC"
+        android:textSize="14sp"
+        android:text="Dents: 34 (Q)" />
+
+    <TextView
+        android:id="@+id/detailAluminumStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#CCCCCC"
+        android:textSize="14sp"
+        android:text="Aluminum: No" />
+
+    <TextView
+        android:id="@+id/detailCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#00FFE8"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+        android:text="Cost: $475.00" />
+
+</LinearLayout>
