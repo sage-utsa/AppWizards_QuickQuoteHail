@@ -27,6 +27,49 @@
             android:layout_marginBottom="32dp"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer Name:"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/customerNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter customer name"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/white"
+            android:textColorHint="#CCCCCC"
+            android:background="@drawable/input_background"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vehicle VIN:"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/customerVinEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter vehicle VIN"
+            android:inputType="textCapCharacters"
+            android:textColor="@android:color/white"
+            android:textColorHint="#CCCCCC"
+            android:background="@drawable/input_background"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:maxLength="17"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
             android:id="@+id/panelTypeLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

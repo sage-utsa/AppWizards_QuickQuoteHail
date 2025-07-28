@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class Calculator {
 
+    private String customerName;
+    private String customerVIN;
+
+
     // Nested Map for the lookup table
     // Panel Type -> (Dents Range -> (Dent Size -> Cost))
     private static final Map<String, Map<String, Map<String, String>>> DENT_COSTS = new HashMap<>();

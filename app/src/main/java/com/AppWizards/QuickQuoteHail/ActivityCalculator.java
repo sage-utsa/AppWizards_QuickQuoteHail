@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.EditText; // Import EditText
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -29,6 +29,10 @@ public class ActivityCalculator extends AppCompatActivity {
     private Button calculateAllCostsButton;
     private TextView totalEstimatedCostDisplay;
 
+    // New UI elements for customer info
+    private EditText customerNameEditText;
+    private EditText customerVinEditText;
+
     // List to hold data for each added panel
     private List<PanelInputData> panelInputDataList;
 
@@ -42,6 +46,10 @@ public class ActivityCalculator extends AppCompatActivity {
         dynamicPanelsContainer = findViewById(R.id.dynamicPanelsContainer);
         calculateAllCostsButton = findViewById(R.id.calculateAllCostsButton);
         totalEstimatedCostDisplay = findViewById(R.id.totalEstimatedCostDisplay);
+
+        // Initialize new UI elements
+        customerNameEditText = findViewById(R.id.customerNameEditText);
+        customerVinEditText = findViewById(R.id.customerVinEditText);
 
         panelInputDataList = new ArrayList<>();
 
@@ -217,6 +225,23 @@ public class ActivityCalculator extends AppCompatActivity {
         boolean allPanelsReady = true;
         Calculator calculator = new Calculator(); // Initialize Calculator once
 
+        // Get customer name and VIN
+        String customerName = customerNameEditText.getText().toString().trim();
+        String customerVin = customerVinEditText.getText().toString().trim();
+
+        if (customerName.isEmpty()) {
+            Toast.makeText(this, "Please enter the customer name.", Toast.LENGTH_SHORT).show();
+            customerNameEditText.requestFocus();
+            return;
+        }
+
+        if (customerVin.isEmpty()) {
+            Toast.makeText(this, "Please enter the vehicle VIN.", Toast.LENGTH_SHORT).show();
+            customerVinEditText.requestFocus();
+            return;
+        }
+
+
         if (panelInputDataList.isEmpty()) {
             Toast.makeText(this, "No panels added to calculate.", Toast.LENGTH_SHORT).show();
             totalEstimatedCostDisplay.setText("Total Estimated Cost: N/A");
@@ -254,8 +279,10 @@ public class ActivityCalculator extends AppCompatActivity {
                 allPanelsReady = false; // Mark as not ready if parsing fails
             }
 
-            // Save individual invoice to history
+            // Save individual invoice to history, now including customerName and customerVin
             Invoice newInvoice = new Invoice(
+                    customerName, // Add customer name
+                    customerVin,  // Add customer VIN
                     panelData.panelType,
                     panelData.largestDentSize,
                     panelData.numberOfDents,
@@ -276,7 +303,7 @@ public class ActivityCalculator extends AppCompatActivity {
         boolean hasCalculatedCosts = false; // Flag to check if any panel has a calculated cost
 
         for (PanelInputData panelData : panelInputDataList) {
-            if (panelData.estimatedCost != null && !panelData.estimatedCost.equals("N/A")) {
+            if (panelData.estimatedCost != null && !panelData.estimatedCost.equals("N/A") && !panelData.estimatedCost.startsWith("CR")) {
                 try {
                     totalCost += Double.parseDouble(panelData.estimatedCost.replace("$", ""));
                     hasCalculatedCosts = true;
