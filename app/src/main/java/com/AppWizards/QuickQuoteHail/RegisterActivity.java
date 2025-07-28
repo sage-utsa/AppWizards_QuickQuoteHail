@@ -36,11 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
             finish(); // Go back to login screen
         });
 
-
-
-
-
-
         // ========== Handle Login Prompt Tap ==========
         loginPrompt.setOnClickListener(v -> {
             finish(); // Go back to login screen

@@ -45,7 +45,7 @@ public class CustomerGroupAdapter extends ArrayAdapter<CustomerInvoiceSummary> {
             holder.customerVinHeader = convertView.findViewById(R.id.customerVinHeader);
             holder.customerTotalCostHeader = convertView.findViewById(R.id.customerTotalCostHeader);
             holder.individualInvoicesContainer = convertView.findViewById(R.id.individualInvoicesContainer);
-            holder.emailButton = convertView.findViewById(R.id.emailCustomerInvoiceButton); // Find the new button
+            holder.emailButton = convertView.findViewById(R.id.shareCustomerInvoiceButton); // Find the new button
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
