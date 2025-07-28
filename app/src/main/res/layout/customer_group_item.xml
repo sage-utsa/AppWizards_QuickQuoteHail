@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Email Invoice"
+            android:text="Share Invoice"
             android:background="@drawable/button_background_green"
             android:textColor="@android:color/white"
             android:layout_marginTop="8dp"
