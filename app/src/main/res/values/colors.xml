@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="colorPrimary">#2786C8</color>
+    <color name="colorAccent">#495B6F</color>
+    <color name="colorBackground">#000000</color>
+    <color name="colorSurface">#1D242C</color>
+    <color name="colorText">#FFFFFF</color>
+    <color name="colorHint">#CCCCCC</color>
+
+    <!-- Additional colors -->
+    <color name="colorHighlight">#00FFE8</color>
+    <color name="colorDivider">#2E3B4E</color>
+    <color name="colorSubtleText">#CCCCCC</color>
+    <color name="colorSurfaceAlt">#1F2A38</color>
 </resources>

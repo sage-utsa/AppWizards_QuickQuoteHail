@@ -13,8 +13,10 @@ package com.AppWizards.QuickQuoteHail;
 
 // === Android Libraries ===
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
@@ -64,6 +66,43 @@ public class LoginActivity extends AppCompatActivity {
         EditText passwordInput = findViewById(R.id.passwordInput);
         Button loginButton = findViewById(R.id.loginButton);
         TextView signUpPrompt = findViewById(R.id.signUpPrompt); // "Sign up here" text
+        ImageView eyeIcon = findViewById(R.id.eyeIcon); // password visibility eye
+
+        // === Password Visibility Toggle ===
+
+        /* This bool array is used to track wherther the password is currently visible
+            Array is used because variables in lambdas must be final
+        */
+        final boolean[] isPasswordVisible = {false};
+
+        // When the eye icon is clicked, toggle the password visibility
+        eyeIcon.setOnClickListener( v -> {
+
+            if (isPasswordVisible[0]) {
+                // if password is currently visibli, hide it
+                // set the input type to password
+                passwordInput.setInputType(
+                        android.text.InputType.TYPE_CLASS_TEXT |
+                        android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+                // change teh icon back to the "eye closed" image
+                eyeIcon.setImageResource(R.drawable.ic_visibility); // password hidden
+            } else {
+                // If password id currently hidden show it, set inmput typt to visible password
+                passwordInput.setInputType(
+                        android.text.InputType.TYPE_CLASS_TEXT |
+                        android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+                // Change the eye back to open
+                eyeIcon.setImageResource(R.drawable.ic_visibility_off); //password visible
+            }
+
+            // Flip the value for the next time its clicked
+            isPasswordVisible[0] = !isPasswordVisible[0];
+
+            //kepp the text cursor ant the end after toggling
+            passwordInput.setSelection(passwordInput.getText().length());
+        });
 
         // === Step 3: Handle Login Button Click ===
         loginButton.setOnClickListener(v -> {

@@ -55,16 +55,26 @@ public class ActivityCalculator extends AppCompatActivity {
 
         // Dropdown menu items
         String[] panelTypes = {
-                "Select Panel",
+                "Add Panel",  // ← visible default item
                 "HOOD", "ROOF", "TRUNK",
                 "LFF", "LFD", "LG", "LQ", "LRAIL",
                 "RFF", "RFD", "RG", "RQ", "RRAIL"
         };
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, panelTypes);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Spinner adaptor
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                R.layout.spinner_item_white, // this affects only the selected (closed) view
+                panelTypes
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // dropdown is fine
         panelSpinner.setAdapter(adapter);
+
+
+
+
+
+
 
         // When user picks a panel, dynamically add it
         panelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

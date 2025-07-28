@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date: MMM DD, YYYY HH:MM"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/colorHint"
         android:textSize="12sp"
         android:layout_marginBottom="4dp" />
 
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Panel: HOOD"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorText"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dents: 15 (Q)"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorText"
         android:textSize="14sp" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aluminum: Yes"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorText"
         android:textSize="14sp" />
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cost: $XXX.XX"
-        android:textColor="#00FFE8"
+        android:textColor="@color/colorHighlight"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp" />

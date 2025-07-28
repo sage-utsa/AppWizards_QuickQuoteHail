@@ -14,6 +14,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Title -->
         <TextView
             android:id="@+id/calculatorTitle"
             android:layout_width="wrap_content"
@@ -21,98 +22,110 @@
             android:text="Dent Repair Calculator"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorText"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="32dp" />
 
+        <!-- Customer Name Label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Customer Name:"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorText"
             android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp" />
 
+        <!-- Customer Name Input -->
         <EditText
             android:id="@+id/customerNameEditText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Enter customer name"
             android:inputType="textPersonName"
-            android:textColor="@android:color/white"
-            android:textColorHint="#CCCCCC"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorHint"
             android:background="@drawable/input_background"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp" />
 
+        <!-- VIN Label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Vehicle VIN:"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorText"
             android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp" />
 
+        <!-- VIN Input -->
         <EditText
             android:id="@+id/customerVinEditText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Enter vehicle VIN"
             android:inputType="textCapCharacters"
-            android:textColor="@android:color/white"
-            android:textColorHint="#CCCCCC"
+            android:maxLength="17"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorHint"
             android:background="@drawable/input_background"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:maxLength="17"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="24dp" />
 
+        <!-- Panel Type Label -->
         <TextView
             android:id="@+id/panelTypeLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select Panel Type:"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorText"
             android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp" />
 
+        <!-- Panel Type Spinner -->
         <Spinner
             android:id="@+id/panelSpinner"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/input_background"
-            android:padding="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:popupTheme="@style/SpinnerPopupDark" />
 
+
+        <!-- Dynamic Panel Container -->
         <LinearLayout
             android:id="@+id/dynamicPanelsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
 
+        <!-- Calculate Button -->
+
+        <!-- Total Cost Display -->
+
         <Button
             android:id="@+id/calculateAllCostsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calculate All Costs"
-            android:background="@drawable/button_background"
-            android:textColor="#00FFE8"
-            android:textStyle="bold"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_background"
+            android:backgroundTint="@null"
+            android:text="Calculate All Costs"
+            android:textColor="@color/colorHint"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/totalEstimatedCostDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Estimated Cost: N/A"
-            android:textColor="#00FFE8"
+            android:textColor="@color/colorHint"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="24dp" />
 
     </LinearLayout>
 </ScrollView>

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Selected Panel: HOOD"
-        android:textColor="#00FFE8"
+        android:textColor="@color/colorHighlight"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Largest Dent Size: Not Set"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorText"
         android:textSize="16sp"
         android:layout_marginBottom="8dp"/>
 
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Select Largest Dent Size"
         android:background="@drawable/button_background"
-        android:textColor="#00FFE8"
+        android:textColor="@color/colorText"
         android:layout_marginBottom="16dp"/>
 
     <TextView
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Number of Dents: Not Set"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorText"
         android:textSize="16sp"
         android:layout_marginBottom="8dp"/>
 
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:text="Enter Number of Dents"
         android:background="@drawable/button_background"
-        android:textColor="#00FFE8"
+        android:textColor="@color/colorText"
         android:layout_marginBottom="16dp"/>
 
     <Switch
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aluminum Panel"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorText"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Estimated Cost: N/A"
-        android:textColor="#00FFE8"
+        android:textColor="@color/colorHighlight"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"

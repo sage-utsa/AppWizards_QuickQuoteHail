@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.AppWizards_QuickQuoteHail" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Override Material 3 button styling -->
+        <item name="buttonStyle">@style/Widget.AppCompat.Button</item>
     </style>
 </resources>

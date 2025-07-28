@@ -12,14 +12,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="8dp"
-        android:background="#2E3B4E">
+        android:background="@color/colorDivider">
+        android:v
 
         <TextView
             android:id="@+id/customerNameHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Customer: John Doe"
-            android:textColor="#00FFE8"
+            android:textColor="@color/colorHighlight"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="4dp"/>
@@ -29,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="VIN: ABCDEF1234567890"
-            android:textColor="#CCCCCC"
+            android:textColor="@color/colorHint"
             android:textSize="16sp"
             android:layout_marginBottom="8dp"/>
 
@@ -38,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total for Customer: $X.XX"
-            android:textColor="@android:color/holo_orange_light"
+            android:textColor="@color/colorHighlight"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
@@ -49,7 +50,7 @@
             android:layout_gravity="end"
             android:text="Share Invoice"
             android:background="@drawable/button_background_green"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorText"
             android:layout_marginTop="8dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
