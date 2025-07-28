@@ -10,49 +10,25 @@ public class Calculator {
     private static final Map<String, Map<String, Map<String, String>>> DENT_COSTS = new HashMap<>();
 
     static {
-        // Initialize the DENT_COSTS map with data from your image
-        // Panel: HOOD
-        Map<String, Map<String, String>> hoodCosts = new HashMap<>();
-        hoodCosts.put("1-5", createDentSizeMap("125", "155", "185", "215"));
-        hoodCosts.put("6-15", createDentSizeMap("185", "215", "255", "325"));
-        hoodCosts.put("16-30", createDentSizeMap("255", "325", "375", "425"));
-        hoodCosts.put("31-50", createDentSizeMap("375", "475", "525", "475")); // Note: 475,475 in H col
-        hoodCosts.put("51-75", createDentSizeMap("475", "525", "625", "800"));
-        hoodCosts.put("76-100", createDentSizeMap("625", "725", "850", "CR")); // CR for 'Call for Quote'
-        hoodCosts.put("101-150", createDentSizeMap("850", "1000", "1200", "1500"));
-        hoodCosts.put("151-200", createDentSizeMap("1200", "1500", "1800", "CR"));
-        hoodCosts.put("201-300", createDentSizeMap("CR", "CR", "CR", "CR"));
-        DENT_COSTS.put("HOOD", hoodCosts);
-
-        // Panel: ROOF
-        Map<String, Map<String, String>> roofCosts = new HashMap<>();
-        roofCosts.put("1-5", createDentSizeMap("125", "155", "185", "215"));
-        roofCosts.put("6-15", createDentSizeMap("185", "215", "255", "325"));
-        roofCosts.put("16-30", createDentSizeMap("255", "325", "375", "425"));
-        roofCosts.put("31-50", createDentSizeMap("375", "475", "525", "475")); // Note: 475,475 in H col
-        roofCosts.put("51-75", createDentSizeMap("475", "525", "625", "800"));
-        roofCosts.put("76-100", createDentSizeMap("625", "725", "850", "1000")); // Note: 1000 in H col
-        roofCosts.put("101-150", createDentSizeMap("850", "1000", "1200", "1500"));
-        roofCosts.put("151-200", createDentSizeMap("1200", "1500", "1800", "CR"));
-        roofCosts.put("201-300", createDentSizeMap("CR", "CR", "CR", "CR"));
-        DENT_COSTS.put("ROOF", roofCosts);
-
-        // Panel: TRUNK
-        Map<String, Map<String, String>> trunkCosts = new HashMap<>();
-        trunkCosts.put("1-5", createDentSizeMap("125", "155", "185", "215"));
-        trunkCosts.put("6-15", createDentSizeMap("185", "215", "255", "325"));
-        trunkCosts.put("16-30", createDentSizeMap("255", "325", "375", "425"));
-        trunkCosts.put("31-50", createDentSizeMap("375", "475", "525", "475")); // Note: 475,475 in H col
-        trunkCosts.put("51-75", createDentSizeMap("475", "525", "625", "800"));
-        trunkCosts.put("76-100", createDentSizeMap("625", "725", "850", "1000")); // Note: 1000 in H col
-        trunkCosts.put("101-150", createDentSizeMap("850", "1000", "1200", "1500"));
-        trunkCosts.put("151-200", createDentSizeMap("1200", "1500", "1800", "CR"));
-        trunkCosts.put("201-300", createDentSizeMap("CR", "CR", "CR", "CR"));
-        DENT_COSTS.put("TRUNK", trunkCosts);
-
+        // Panel: HOOD, ROOF, TRUNK - Each gets its own independent cost map
+        String[] mainPanels = {"HOOD", "ROOF", "TRUNK"};
+        for (String panel : mainPanels) {
+            // A NEW HashMap is created for EACH panel (Hood, Roof, Trunk).
+            // This ensures that HOOD's map is distinct from ROOF's map, etc.
+            Map<String, Map<String, String>> panelCosts = new HashMap<>();
+            panelCosts.put("1-5", createDentSizeMap("125", "155", "185", "215"));
+            panelCosts.put("6-15", createDentSizeMap("185", "215", "255", "325"));
+            panelCosts.put("16-30", createDentSizeMap("255", "325", "375", "425"));
+            panelCosts.put("31-50", createDentSizeMap("375", "425", "475", "575")); // Note: 475,475 in H col
+            panelCosts.put("51-75", createDentSizeMap("475", "525", "625", "800"));
+            panelCosts.put("76-100", createDentSizeMap("625", "725", "850", "CR")); // CR for 'Call for Quote'
+            panelCosts.put("101-150", createDentSizeMap("850", "1000", "1200", "1500"));
+            panelCosts.put("151-200", createDentSizeMap("1200", "1500", "1800", "CR"));
+            panelCosts.put("201-300", createDentSizeMap("CR", "CR", "CR", "CR"));
+            DENT_COSTS.put(panel, panelCosts); // Each panel gets its own distinct map
+        }
         // Panel: LFF (Left Front Fender) and other similar 95-start panels
-        // For simplicity, grouping all '95' initial value panels into one category
-        // LFF, LFD, LG, LQ, LRAIL, RFF, RFD, RG, RQ, RRAIL
+        // This part remains the same as it already follows the distinct-map-per-panel pattern
         String[] panelsWith95Start = {"LFF", "LFD", "LG", "LQ", "LRAIL", "RFF", "RFD", "RG", "RQ", "RRAIL"};
         for (String panel : panelsWith95Start) {
             Map<String, Map<String, String>> panelCosts = new HashMap<>();
