@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Selected Panel: HOOD"
-        android:textColor="@color/colorHighlight"
+        android:textColor="@color/colorText"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>

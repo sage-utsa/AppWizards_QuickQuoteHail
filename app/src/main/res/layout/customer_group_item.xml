@@ -13,14 +13,13 @@
         android:orientation="vertical"
         android:paddingBottom="8dp"
         android:background="@color/colorDivider">
-        android:v
 
         <TextView
             android:id="@+id/customerNameHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Customer: John Doe"
-            android:textColor="@color/colorHighlight"
+            android:textColor="@color/colorText"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="4dp"/>
@@ -39,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total for Customer: $X.XX"
-            android:textColor="@color/colorHighlight"
+            android:textColor="@color/colorText"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
