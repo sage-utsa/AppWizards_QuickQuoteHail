@@ -140,8 +140,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,
                             "Login successful!", Toast.LENGTH_SHORT).show();
 
-                    // Navigate to MainActivity
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    // Navigate to DashboardActivity
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent);
                     finish(); // Prevents returning to login screen
                 } else {
