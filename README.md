@@ -10,7 +10,7 @@ QuickQuoteHail is an Android application designed to assist hail damage repair t
 
 ---
 
-## ✨ Features
+## Features
 
 - **Login & Registration** using a file-based credential system
 - **Damage Calculator** with support for dent size, count, and material type
@@ -28,7 +28,7 @@ QuickQuoteHail is an Android application designed to assist hail damage repair t
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
 ### Requirements
 - Android Studio (Giraffe or newer)
