@@ -1,0 +1,73 @@
+@startuml
+title QuickQuoteHail - UML Overview (MVC)
+
+' === Package Declarations ===
+package "com.AppWizards.QuickQuoteHail.models" {
+    class Invoice {
+        - panelType: String
+        - numberOfDents: int
+        - estimatedCost: String
+        + getEstimatedCost(): String
+    }
+
+    class CustomerInvoiceSummary {
+        - customerName: String
+        - invoices: List<Invoice>
+        + getCustomerName(): String
+        + getInvoices(): List<Invoice>
+    }
+
+    class PanelInputData {
+        - panelType: String
+        - dentSize: String
+        - dentCount: int
+    }
+
+    class Calculator {
+        + calculateCost(...): double
+    }
+
+    class InvoiceManager {
+        + saveInvoice(...)
+        + loadInvoices(...): List<Invoice>
+    }
+}
+
+package "com.AppWizards.QuickQuoteHail" {
+    class LoginActivity
+    class RegisterActivity
+    class DashboardActivity
+    class ActivityCalculator
+    class ActivityInvoice
+
+    class CustomerGroupAdapter
+    class PdfGenerator
+}
+
+' === Relationships ===
+CustomerInvoiceSummary --> Invoice
+PdfGenerator --> CustomerInvoiceSummary
+PdfGenerator --> Invoice
+ActivityInvoice --> CustomerInvoiceSummary
+ActivityCalculator --> PanelInputData
+ActivityCalculator --> Calculator
+ActivityCalculator --> InvoiceManager
+DashboardActivity --> ActivityCalculator
+DashboardActivity --> ActivityInvoice
+LoginActivity --> DashboardActivity
+RegisterActivity --> LoginActivity
+
+' === Grouping (Informal) ===
+note top of LoginActivity
+<< Controller >>
+end note
+
+note top of Invoice
+<< Model >>
+end note
+
+note top of CustomerGroupAdapter
+<< View/Adapter >>
+end note
+
+@enduml
