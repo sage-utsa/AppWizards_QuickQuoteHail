@@ -41,7 +41,7 @@ QuickQuoteHail is an Android application designed to assist hail damage repair t
 1. **Download the Project**
     - Clone with Git:
       ```bash
-      git clone https://github.com/YOUR-TEAM/QuickQuoteHail.git
+      git clone https://github.com/sage-utsa/AppWizards_QuickQuoteHail.git
       ```
     - Or download the ZIP from GitHub and extract it.
 
