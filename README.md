@@ -18,7 +18,6 @@ QuickQuoteHail is an Android application designed to assist hail damage repair t
 - **Damage Calculator** with support for dent size, count, and material type
 - **PDF Invoice Generator** with branded layout and cost breakdown
 - **Invoice History** to review past vehicle estimates
-- **Edge-to-edge layout** and password visibility toggle
 
 ---
 
