@@ -1,4 +1,4 @@
-package com.AppWizards.QuickQuoteHail;
+package models;
 
 import android.widget.Button;
 import android.widget.LinearLayout;

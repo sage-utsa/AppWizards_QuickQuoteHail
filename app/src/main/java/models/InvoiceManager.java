@@ -1,4 +1,4 @@
-package com.AppWizards.QuickQuoteHail;
+package models;
 
 import android.content.Context;
 import android.util.Log;

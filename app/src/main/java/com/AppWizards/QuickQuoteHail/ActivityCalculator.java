@@ -1,8 +1,6 @@
 package com.AppWizards.QuickQuoteHail;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -13,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +18,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import models.Calculator;
+import models.Invoice;
+import models.InvoiceManager;
+import models.PanelInputData;
 
 public class ActivityCalculator extends AppCompatActivity {
 

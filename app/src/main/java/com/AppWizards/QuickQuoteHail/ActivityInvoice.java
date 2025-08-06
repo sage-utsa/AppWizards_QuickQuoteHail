@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.CustomerInvoiceSummary;
+import models.InvoiceManager;
+
 public class ActivityInvoice extends AppCompatActivity implements CustomerGroupAdapter.OnEmailInvoiceClickListener {
 
     private ListView invoiceListView;

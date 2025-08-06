@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import models.CustomerInvoiceSummary;
+import models.Invoice;
+
 public class PdfGenerator {
 
     private static final String TAG = "PdfGenerator";
