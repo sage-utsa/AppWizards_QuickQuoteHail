@@ -22,7 +22,7 @@ QuickQuoteHail is an Android application designed to assist hail damage repair t
 
 ---
 
-## 👥 Team
+## Team
 
 - Justice
 - Khristian
