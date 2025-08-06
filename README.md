@@ -6,6 +6,8 @@ Created by **Team AppWizards**
 
 ---
 
+<img src="app_logo.png" alt="QuickQuoteHail Logo" width="150"/>
+
 QuickQuoteHail is an Android application designed to assist hail damage repair technicians in estimating vehicle panel damage and generating professional invoice summaries. The app features dynamic input screens, built-in cost logic (including aluminum panel multipliers), and a PDF invoice generator. It also maintains a history of previous estimates for easy reference.
 
 ---
