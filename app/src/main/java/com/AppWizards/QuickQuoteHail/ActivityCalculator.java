@@ -24,6 +24,12 @@ import models.Invoice;
 import models.InvoiceManager;
 import models.PanelInputData;
 
+/**
+ * This activity allows users to
+ * dynamically add vehicle panels, input dent information for each panel, and calculate
+ * an estimated repair cost for the entire vehicle. It also handles saving the generated
+ * invoices to a history.
+ */
 public class ActivityCalculator extends AppCompatActivity {
 
     // UI elements
@@ -39,6 +45,14 @@ public class ActivityCalculator extends AppCompatActivity {
     // List of all panels user adds dynamically
     private List<PanelInputData> panelInputDataList;
 
+    /**
+     * Called when the activity is first created. This is where you do all of your
+     * normal static set up create views, bind data to lists, etc.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     * being shut down then this Bundle contains the data it most
+     * recently supplied in {@link #onSaveInstanceState}.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +111,13 @@ public class ActivityCalculator extends AppCompatActivity {
         calculateAllCostsButton.setOnClickListener(v -> calculateAndDisplayAllCosts());
     }
 
-    // Adds a new panel section with input options
+    /**
+     * Dynamically adds a new panel input section to the UI for a given panel type.
+     * This section includes fields for dent size, number of dents, material type (aluminum),
+     * and a button to remove the panel.
+     *
+     * @param panelType The type of vehicle panel to add (e.g., "HOOD", "ROOF").
+     */
     private void addPanelInputSection(String panelType) {
         LayoutInflater inflater = LayoutInflater.from(this);
         View panelInputView = inflater.inflate(R.layout.panel_input_section, dynamicPanelsContainer, false);
@@ -146,14 +166,23 @@ public class ActivityCalculator extends AppCompatActivity {
 
         updateTotalEstimatedCostDisplay();
     }
-
+    /**
+     * Removes a panel input section from the UI and updates the total estimated cost.
+     *
+     * @param panelData The {@link PanelInputData} object associated with the panel to be removed.
+     */
     private void removePanelInputSection(PanelInputData panelData) {
         dynamicPanelsContainer.removeView(panelData.panelLayout);
         panelInputDataList.remove(panelData);
         updateTotalEstimatedCostDisplay();
         Toast.makeText(this, panelData.panelType + " panel removed.", Toast.LENGTH_SHORT).show();
     }
-
+    /**
+     * Displays a dialog for the user to select the largest dent size for a specific panel.
+     * It presents a list of predefined dent sizes.
+     *
+     * @param currentPanelData The {@link PanelInputData} object for the panel being configured.
+     */
     private void showDentSizeDialog(PanelInputData currentPanelData) {
         final String[] dentSizes = {"D", "N", "Q", "H"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -168,7 +197,12 @@ public class ActivityCalculator extends AppCompatActivity {
         builder.setNegativeButton("Cancel", null);
         builder.show();
     }
-
+    /**
+     * Displays a text for the user to enter the number of dents for a specific panel.
+     * The input is validated to ensure it is a positive integer.
+     *
+     * @param currentPanelData The {@link PanelInputData} object for the panel being configured.
+     */
     private void showNumDentsDialog(PanelInputData currentPanelData) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter Number of Dents for " + currentPanelData.panelType);
@@ -204,7 +238,12 @@ public class ActivityCalculator extends AppCompatActivity {
         builder.setNegativeButton("Cancel", null);
         builder.show();
     }
-
+    /**
+     * Calculates the estimated cost for all added panels and displays the total.
+     * It first validates that all necessary information (customer name, VIN, and all panel inputs)
+     * has been provided. If successful, it calculates each panel's cost, updates the UI,
+     * and saves each panel's invoice to the history.
+     */
     private void calculateAndDisplayAllCosts() {
         double totalCost = 0.0;
         boolean allPanelsReady = true;
@@ -274,7 +313,11 @@ public class ActivityCalculator extends AppCompatActivity {
             Toast.makeText(this, "All invoices saved to history!", Toast.LENGTH_SHORT).show();
         }
     }
-
+    /**
+     * Updates the total estimated cost display on the UI by summing the costs of
+     * all currently added panels that have a valid calculated cost.
+     * The display will show "N/A" if no panels have a calculated cost.
+     */
     private void updateTotalEstimatedCostDisplay() {
         double totalCost = 0.0;
         boolean hasCalculatedCosts = false;

@@ -16,24 +16,53 @@ import java.util.List;
 
 import models.CustomerInvoiceSummary;
 import models.Invoice;
-
+/**
+ * An ArrayAdapter for displaying a list of {@link CustomerInvoiceSummary} objects.
+ * This adapter is responsible for inflating a view for each customer group, populating
+ * it with summary information (customer name, VIN, total cost), and dynamically
+ * adding views for each individual invoice associated with that customer. It also
+ * provides an interface to handle click events on an "Email Invoice" button.
+ */
 public class CustomerGroupAdapter extends ArrayAdapter<CustomerInvoiceSummary> {
 
     private LayoutInflater inflater;
     private OnEmailInvoiceClickListener emailClickListener; // New listener interface
 
-    // Define an interface for click events
+    /**
+     * An interface to handle click events on the "Email Invoice" button within a list item.
+     * The implementing class (e.g., an Activity) will receive the {@link CustomerInvoiceSummary}
+     * for the clicked item.
+     */
     public interface OnEmailInvoiceClickListener {
+        /**
+         * Called when the email button for a customer's invoice is clicked.
+         * @param summary The {@link CustomerInvoiceSummary} of the customer whose invoice is being emailed.
+         */
         void onEmailInvoiceClick(CustomerInvoiceSummary summary);
     }
 
-    // Modify constructor to accept the listener
+    /**
+     * Constructs a new {@link CustomerGroupAdapter}.
+     *
+     * @param context The current context.
+     * @param summaries A list of {@link CustomerInvoiceSummary} objects to be displayed.
+     * @param listener The listener for email button clicks.
+     */
     public CustomerGroupAdapter(@NonNull Context context, @NonNull List<CustomerInvoiceSummary> summaries, OnEmailInvoiceClickListener listener) {
         super(context, 0, summaries);
         inflater = LayoutInflater.from(context);
         this.emailClickListener = listener; // Assign the listener
     }
-
+    /**
+     * Get a View that displays the data at the specified position in the data set.
+     * This method inflates a new view if needed, binds the data from the {@link CustomerInvoiceSummary}
+     * object to the views, and handles the creation of sub-views for each individual invoice.
+     *
+     * @param position The position of the item within the adapter's data set.
+     * @param convertView The old view to reuse, if possible
+     * @param parent The parent that this view will eventually be attached to.
+     * @return A View corresponding to the data at the specified position
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -92,7 +121,10 @@ public class CustomerGroupAdapter extends ArrayAdapter<CustomerInvoiceSummary> {
 
         return convertView;
     }
-
+    /**
+     * A static ViewHolder class to hold references to the views in the list item layout.
+     * This improves performance by avoiding repeated calls to findViewById().
+     */
     static class ViewHolder {
         TextView customerNameHeader;
         TextView customerVinHeader;

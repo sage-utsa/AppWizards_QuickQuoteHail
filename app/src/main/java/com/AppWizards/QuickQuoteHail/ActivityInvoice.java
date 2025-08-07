@@ -17,6 +17,11 @@ import java.util.List;
 import models.CustomerInvoiceSummary;
 import models.InvoiceManager;
 
+/**
+ * The ActivityInvoice class displays a history of all generated invoices.
+ * It loads and groups invoices by customer, presents them in a list, and provides
+ * functionality to clear the history or email a specific invoice to a customer.
+ */
 public class ActivityInvoice extends AppCompatActivity implements CustomerGroupAdapter.OnEmailInvoiceClickListener {
 
     private ListView invoiceListView;
@@ -24,6 +29,12 @@ public class ActivityInvoice extends AppCompatActivity implements CustomerGroupA
     private TextView emptyStateTextView;
     private Button clearHistoryButton;
 
+    /**
+     * Called when the activity is first created. This method initializes the UI components,
+     * sets up the click listener for the clear history button, and loads the invoice data.
+     *
+     * @param savedInstanceState A Bundle object containing the activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +48,20 @@ public class ActivityInvoice extends AppCompatActivity implements CustomerGroupA
 
         loadAndDisplayInvoices();
     }
-
+    /**
+     * Called when the activity resumes. the purpose of this method is to ensure that invoice list is refreshed
+     * every time the user returns to this activity, showing any new invoices that might
+     * have been created.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         loadAndDisplayInvoices();
     }
-
+    /**
+     * Loads invoices from the InvoiceManager, groups them by customer, and populates
+     * the ListView. If no invoices are found, it displays a message and hides the list.
+     */
     private void loadAndDisplayInvoices() {
         List<CustomerInvoiceSummary> groupedInvoices = InvoiceManager.loadGroupedInvoices(this);
 
@@ -60,14 +78,25 @@ public class ActivityInvoice extends AppCompatActivity implements CustomerGroupA
             invoiceListView.setAdapter(adapter);
         }
     }
-
+    /**
+     * Clears all saved invoice history. It does this by saving an empty list of invoices
+     * to the persistent storage and then re-calling {@link #loadAndDisplayInvoices()} to
+     * refresh the UI.
+     */
     private void clearInvoiceHistory() {
         InvoiceManager.saveAllInvoices(this, new ArrayList<>());
         loadAndDisplayInvoices();
         Toast.makeText(this, "Invoice history cleared.", Toast.LENGTH_SHORT).show();
     }
 
-    // Implementation of the OnEmailInvoiceClickListener interface
+
+    /**
+     * Handles the event when the "Email Invoice" button is clicked for a specific customer summary.
+     * This method first generates a PDF of the invoice using {@link PdfGenerator} and then
+     * creates and starts an email intent with the PDF attached.
+     *
+     * @param summary The {@link CustomerInvoiceSummary} object for the invoice to be emailed.
+     */
     @Override
     public void onEmailInvoiceClick(CustomerInvoiceSummary summary) {
         // --- Generate PDF first ---
