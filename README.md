@@ -1,4 +1,4 @@
-# QuickQuoteHail
+# QuickQuoteHail: Estimate hail damage and generate invoices on the go
 
 <img src="circle_logo.png" alt="AppWizards Logo" width="150"/>
 
@@ -8,55 +8,103 @@ Created by **Team AppWizards**
 
 <img src="app_logo.png" alt="QuickQuoteHail Logo" width="150"/>
 
-QuickQuoteHail is an Android application designed to assist hail damage repair technicians in estimating vehicle panel damage and generating professional invoice summaries. The app features dynamic input screens, built-in cost logic (including aluminum panel multipliers), and a PDF invoice generator. It also maintains a history of previous estimates for easy reference.
+## Motivation
+QuickQuoteHail was created to simplify the process of estimating hail damage for auto repair technicians. The app provides an efficient way to record panel damage, calculate costs, and generate professional invoices—all without needing internet access. Our goal is to make quoting fast, accurate, and stress-free.
 
 ---
 
-## Features
-
-- **Login & Registration** using a file-based credential system
-- **Damage Calculator** with support for dent size, count, and material type
-- **PDF Invoice Generator** with branded layout and cost breakdown
-- **Invoice History** to review past vehicle estimates
+## Build Status
+The current version of QuickQuoteHail is **fully functional** and passes all internal tests. Future improvements may include cloud syncing, advanced sorting options, and client tracking features.
 
 ---
 
-## Team
-
-- Justice
-- Khristian
-- Sage (@sage-utsa)
+## Code Style
+- Language: **Java**
+- IDE: **Android Studio**
+- Architecture: **MVC (Model-View-Controller)**
 
 ---
 
-## How to Run
+## Video Demonstration
+🎥 [Watch the demo](https://drive.google.com/file/d/1E0CWEUIhW-4bnAReD1ggmaGIQpnurovc/view?usp=drive_link)
+
+---
+
+## Tech Used
+- **Android Studio** for development
+- **Java 17** for logic and UI
+- **Adobe XD** for app design
+- **GitHub** for version control
+- **Google Drive** for shared assets
+- **Group Chat/Instagram** for team communication
+
+---
+
+## Example Code Snippet
+```java
+public double calculateTotalCost(Panel panel) {
+    double baseRate = panel.getDentCount() * getDentRate(panel.getDentSize());
+    if (panel.getMaterial().equals("Aluminum")) {
+        baseRate *= ALUMINUM_MULTIPLIER;
+    }
+    return baseRate;
+}
+```
+
+---
+
+## Known Issues
+- No database integration—data is stored locally
+- Invoice history lacks advanced filtering/sorting
+
+---
+
+## Installation
+
+> The app is not currently available on the Google Play Store.
 
 ### Requirements
 - Android Studio (Giraffe or newer)
 - Java SDK 17+
 - Android SDK (API 33+)
-- Android Emulator or USB-connected device
+- Android Emulator or physical device with USB debugging
 
-### Setup Instructions
+### Steps
 
-1. **Download the Project**
-    - Clone with Git:
-      ```bash
-      git clone https://github.com/sage-utsa/AppWizards_QuickQuoteHail.git
-      ```
-    - Or download the ZIP from GitHub and extract it.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/sage-utsa/AppWizards_QuickQuoteHail.git
+   ```
 
-2. **Open in Android Studio**
-    - Launch Android Studio
-    - Click **"Open"**, then select the extracted project folder
-    - Wait for Gradle to sync (accept any prompts)
+2. Open the project in **Android Studio**
+   - Click **"Open"** and select the project folder
+   - Let Gradle sync and install any required components
 
-3. **Run the App**
-    - Use an Android Emulator or connect a device with USB debugging enabled
-    - Click the green **Run ▶** button
+3. Connect a device or launch an emulator
 
-4. **Login Info**
-   - Email: user@example.com
-   - Password: password123
+4. Run the app using the **green ▶ button**
 
-#### No internet required. All data is stored locally on the device.
+5. Login with test credentials:
+   - **Email:** `user@example.com`
+   - **Password:** `password123`
+
+> No internet required — all data is stored locally on the device.
+
+---
+
+## How to Use
+
+- **Login/Register** with file-based credentials
+- **Add Panels** by selecting dent size, count, and material
+- **View Estimate** to calculate and review total cost
+- **Generate PDF** to create a branded invoice
+- **Check History** to review and reopen past estimates
+
+---
+
+## Credits
+
+Created by **Team AppWizards**
+- [Justice](https://github.com/JusticeHurt)
+- [Khristian](https://github.com/kneal26)
+- [Sage](https://github.com/sage-utsa)
