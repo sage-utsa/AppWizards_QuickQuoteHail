@@ -1,3 +1,5 @@
+plantuml -tsvg QuickQuoteHail.puml
+
 @startuml
 skinparam style strictuml
 hide empty fields
