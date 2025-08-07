@@ -1,0 +1,137 @@
+@startuml
+skinparam style strictuml
+hide empty fields
+hide empty methods
+top to bottom direction
+skinparam linetype ortho
+skinparam package {
+  BorderColor black
+  BackgroundColor White
+}
+
+' ===== MODEL =====
+package models <<Model>> {
+  skinparam packageBackgroundColor #E8F5E9
+
+  class Invoice {
+    - customerName : String
+    - customerVIN : String
+    - panelType : String
+    - largestDentSize : String
+    - numberOfDents : int
+    - isAluminum : boolean
+    - estimatedCost : String
+    - creationTimestamp : long
+    + getCustomerName() : String
+    + getCustomerVIN() : String
+    + getPanelType() : String
+    + getLargestDentSize() : String
+    + getNumberOfDents() : int
+    + isAluminum() : boolean
+    + getEstimatedCost() : String
+    + getCreationTimestamp() : long
+    + getFormattedDate() : String
+    + getCalculatedCost() : String
+    + toJsonObject() : JSONObject
+    + toString() : String
+  }
+
+  class Calculator {
+    {static} DENT_COSTS : Map<String, Map<String, Map<String, String>>>
+    {static} createDentSizeMap(q1:String, q2:String, q3:String, q4:String) : Map<String,String>
+    + getEstimatedCost(panelType:String, largestDentSize:String, numberOfDents:int, isAluminum:boolean) : String
+  }
+
+  class CustomerInvoiceSummary {
+    - invoices : List<Invoice>
+    + addInvoice(Invoice) : void
+    + getCustomerName() : String
+    + getCustomerVIN() : String
+    + getTotalCost() : double
+    + getInvoices() : List<Invoice>
+  }
+
+  class InvoiceManager {
+    + saveInvoice(ctx, inv:Invoice) : void
+    + saveAllInvoices(ctx, list:List<Invoice>) : void
+    + loadRawInvoices(ctx) : List<Invoice>
+    + loadGroupedInvoices(ctx) : List<CustomerInvoiceSummary>
+  }
+
+  class PanelInputData {
+    + panelType : String
+    + largestDentSize : String
+    + numberOfDents : int
+    + isAluminum : boolean
+    + estimatedCost : String
+  }
+
+  class AuthManager {
+    + login(email:String, password:String) : boolean
+    + register(email:String, password:String) : boolean
+  }
+
+  ' Data relations
+  InvoiceManager o-- CustomerInvoiceSummary
+  CustomerInvoiceSummary o-- Invoice
+}
+
+' ===== CONTROLLERS / VIEWS =====
+package com.AppWizards.QuickQuoteHail <<Controller/View>> {
+  skinparam packageBackgroundColor #E3F2FD
+
+  ' Keep controllers aligned
+  together {
+    class LoginActivity
+    class RegisterActivity
+    class DashboardActivity
+  }
+
+  class ActivityCalculator {
+    + addPanelInputSection(String) : void
+    + removePanelInputSection(PanelInputData) : void
+    + calculateAndDisplayAllCosts() : void
+    + updateTotalEstimatedCostDisplay() : void
+  }
+
+  class ActivityInvoice {
+    + loadAndDisplayInvoices() : void
+    + clearInvoiceHistory() : void
+    + onEmailInvoiceClick(summary:models.CustomerInvoiceSummary) : void
+  }
+
+  class CustomerGroupAdapter {
+    - emailClickListener : OnEmailInvoiceClickListener
+    + getView(int, View, ViewGroup) : View
+  }
+
+  interface "CustomerGroupAdapter.OnEmailInvoiceClickListener" as OnEmailInvoiceClickListener {
+    + onEmailInvoiceClick(summary:models.CustomerInvoiceSummary) : void
+  }
+
+  class PdfGenerator {
+    + generateInvoicePdf(ctx, summary:models.CustomerInvoiceSummary) : Uri
+  }
+
+  ' Wiring (flows downward Model-wise)
+  ActivityCalculator --> models.PanelInputData
+  ActivityCalculator --> models.Calculator
+  ActivityCalculator --> models.InvoiceManager
+
+  ActivityInvoice --> models.InvoiceManager
+  ActivityInvoice --> models.CustomerInvoiceSummary
+  ActivityInvoice --> CustomerGroupAdapter
+  ActivityInvoice ..|> OnEmailInvoiceClickListener
+
+  CustomerGroupAdapter --> OnEmailInvoiceClickListener
+  PdfGenerator --> models.CustomerInvoiceSummary
+
+  ' Auth flow (new)
+  LoginActivity --> models.AuthManager
+  RegisterActivity --> models.AuthManager
+
+  ' Optional: show Dashboard touching the model (e.g., counts/stats)
+  DashboardActivity --> models.InvoiceManager
+}
+
+@enduml

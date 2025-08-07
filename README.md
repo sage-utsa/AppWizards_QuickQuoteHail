@@ -27,8 +27,16 @@ QuickQuoteHail is fully functional and stable. Additional enhancements may be ex
 
 ---
 
+## Architecture Diagram
+
+<img src="QuickQuoteHail_UML.png" alt="QuickQuoteHail UML Diagram" width="700"/>
+
+This UML diagram illustrates the main components of QuickQuoteHail and how the Model–View–Controller architecture is applied.
+
+---
+
 ## Video Demonstration
-🎥 [Watch the demo](https://drive.google.com/file/d/1E0CWEUIhW-4bnAReD1ggmaGIQpnurovc/view?usp=drive_link)
+ [Watch the demo](https://drive.google.com/file/d/1E0CWEUIhW-4bnAReD1ggmaGIQpnurovc/view?usp=drive_link)
 
 ---
 
