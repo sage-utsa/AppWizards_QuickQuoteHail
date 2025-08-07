@@ -15,8 +15,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The RegisterActivity class handles user registration for the QuickQuoteHail application.
+ * It provides a UI for users to enter an email, password, and confirm password.
+ * This activity validates the inputs, checks if the email is already registered by reading a local file,
+ * and, if the registration is successful, saves the new credentials to a local file.
+ */
 public class RegisterActivity extends AppCompatActivity {
-
+    /**
+     * Called when the activity is first created. This method initializes the UI,
+     * sets up click listeners for the register button and the login prompt, and
+     * contains the logic for handling user registration.
+     *
+     * @param savedInstanceState A Bundle object containing the activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -3,6 +3,13 @@ package models;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The Calculator class provides the core business logic for estimating the cost of hail damage repair.
+ * It uses a static, nested HashMap to store a lookup table of repair costs based on a variety of
+ * factors, including panel type, the largest dent size, and the total number of dents.
+ * The class also handles applying an additional multiplier for aluminum panels and provides
+ * a method to retrieve the estimated cost as a formatted string
+ */
 public class Calculator {
 
     private String customerName;
@@ -48,7 +55,15 @@ public class Calculator {
             DENT_COSTS.put(panel, panelCosts);
         }
     }
-
+    /**
+     * Helper method to create the innermost map for dent sizes.
+     *
+     * @param d The cost for dent size 'D'.
+     * @param n The cost for dent size 'N'.
+     * @param q The cost for dent size 'Q'.
+     * @param h The cost for dent size 'H'.
+     * @return A map linking dent size categories to their costs.
+     */
     // Helper method to create the innermost map for dent sizes
     private static Map<String, String> createDentSizeMap(String d, String n, String q, String h) {
         Map<String, String> map = new HashMap<>();
@@ -118,7 +133,12 @@ public class Calculator {
         }
     }
 
-    // Helper to determine the correct dent range key from the number of dents
+    /**
+     * Helper method to determine the correct dent range key from the number of dents.
+     *
+     * @param numDents The number of dents.
+     * @return A String representing the dent range (e.g., "1-5"), or null if the number is out of the defined range.
+     */
     private String getDentRangeKey(int numDents) {
         if (numDents >= 1 && numDents <= 5) return "1-5";
         if (numDents >= 6 && numDents <= 15) return "6-15";

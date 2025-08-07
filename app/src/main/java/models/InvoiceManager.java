@@ -19,19 +19,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Manages the persistence of invoice data for the application. This class handles
+ * saving, loading, and grouping invoices. It stores invoice data as a JSON array in a
+ * private file and provides methods to interact with this data, including loading
+ * all invoices and organizing them into a summary format grouped by customer and vehicle.
+ */
 public class InvoiceManager {
 
     private static final String FILENAME = "invoices.json";
     private static final String TAG = "InvoiceManager";
-
-    // Method to save a single invoice
+    /**
+     * Appends a new invoice to the existing list of invoices and saves the
+     * updated list back to the file.
+     *
+     * @param context The application context, used for file I/O.
+     * @param newInvoice The new {@link Invoice} object to be saved.
+     */
     public static void saveInvoice(Context context, Invoice newInvoice) {
         List<Invoice> currentInvoices = loadRawInvoices(context);
         currentInvoices.add(newInvoice);
         saveAllInvoices(context, currentInvoices);
     }
 
-    // Method to save the entire list of invoices
+    /**
+     * Saves an entire list of invoices to the application's private file storage.
+     * The invoices are converted to a JSON array string before being written.
+     * This method overwrites any existing file with the same name.
+     *
+     * @param context The application context.
+     * @param invoicesToSave The list of {@link Invoice} objects to save.
+     */
     public static void saveAllInvoices(Context context, List<Invoice> invoicesToSave) {
         JSONArray jsonArray = new JSONArray();
         for (Invoice inv : invoicesToSave) {
@@ -50,7 +68,13 @@ public class InvoiceManager {
         }
     }
 
-    // Loads raw invoices from the file
+    /**
+     * Loads all raw invoices from the saved file and returns them as a list.
+     * If the file does not exist or is empty, an empty list is returned.
+     *
+     * @param context The application context.
+     * @return A list of all {@link Invoice} objects found in the file.
+     */
     public static List<Invoice> loadRawInvoices(Context context) {
         List<Invoice> invoices = new ArrayList<>();
         try (FileInputStream fis = context.openFileInput(FILENAME);
