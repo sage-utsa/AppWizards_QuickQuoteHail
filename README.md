@@ -1,4 +1,4 @@
-# QuickQuoteHail: Estimate hail damage and generate invoices on the go
+# QuickQuoteHail: A Mobile Hail Damage Calculator
 
 <img src="circle_logo.png" alt="AppWizards Logo" width="150"/>
 
@@ -9,12 +9,14 @@ Created by **Team AppWizards**
 <img src="app_logo.png" alt="QuickQuoteHail Logo" width="150"/>
 
 ## Motivation
-QuickQuoteHail was created to simplify the process of estimating hail damage for auto repair technicians. The app provides an efficient way to record panel damage, calculate costs, and generate professional invoices—all without needing internet access. Our goal is to make quoting fast, accurate, and stress-free.
+QuickQuoteHail was created to simplify the process of estimating hail damage for auto repair technicians. 
+The app provides an efficient way to record panel damage, calculate costs, and generate professional invoices, all without needing internet access.
+Our goal is to make quoting fast, accurate, and stress-free.
 
 ---
 
 ## Build Status
-The current version of QuickQuoteHail is **fully functional** and passes all internal tests. Future improvements may include cloud syncing, advanced sorting options, and client tracking features.
+QuickQuoteHail is fully functional and stable. Additional enhancements may be explored in the future.
 
 ---
 
@@ -54,14 +56,13 @@ public double calculateTotalCost(Panel panel) {
 ---
 
 ## Known Issues
-- No database integration—data is stored locally
+- No database integration, current data is stored locally
 - Invoice history lacks advanced filtering/sorting
 
 ---
 
 ## Installation
 
-> The app is not currently available on the Google Play Store.
 
 ### Requirements
 - Android Studio (Giraffe or newer)
@@ -84,9 +85,11 @@ public double calculateTotalCost(Panel panel) {
 
 4. Run the app using the **green ▶ button**
 
-5. Login with test credentials:
-   - **Email:** `user@example.com`
-   - **Password:** `password123`
+5. **Login or Register**
+   - You can log in using the test account below **or** create your own account directly in the app.
+   - **Test Account:**
+      - **Email:** `user@example.com`
+      - **Password:** `password123`
 
 > No internet required — all data is stored locally on the device.
 
