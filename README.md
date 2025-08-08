@@ -23,7 +23,7 @@ QuickQuoteHail is fully functional and stable. Additional enhancements may be ex
 ## Code Style
 - Language: **Java**
 - IDE: **Android Studio**
-- Architecture: **MVC (Model-View-Controller)**
+- Architecture: **MVC (Model View Controller)**
 
 ---
 
