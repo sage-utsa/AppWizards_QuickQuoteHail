@@ -1,5 +1,5 @@
 /*
- * LoginActivity.java
+ * ActivityLogin.java
  *
  * Displays the login screen for the QuickQuoteHail app.
  * Handles basic user login using a file-based credential system.
@@ -29,10 +29,10 @@ import androidx.core.view.WindowInsetsCompat;
 import models.AuthManager; // << use model layer
 
 /**
- * LoginActivity displays the login screen and handles basic credential-based authentication.
+ * ActivityLogin displays the login screen and handles basic credential-based authentication.
  * If credentials are valid, it moves to the main screen.
  */
-public class LoginActivity extends AppCompatActivity {
+public class ActivityLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             String password = passwordInput.getText().toString().trim();
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(LoginActivity.this,
+                Toast.makeText(ActivityLogin.this,
                         "Please enter both email and password", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -85,18 +85,18 @@ public class LoginActivity extends AppCompatActivity {
             boolean matchFound = auth.login(email, password);
 
             if (matchFound) {
-                Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                Toast.makeText(ActivityLogin.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ActivityLogin.this, ActivityDashboard.class);
                 startActivity(intent);
                 finish(); // Prevents returning to login screen
             } else {
-                Toast.makeText(LoginActivity.this, "Invalid email or password.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivityLogin.this, "Invalid email or password.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // === Navigate to RegisterActivity when "Sign Up" is clicked ===
+        // === Navigate to ActivityRegister when "Sign Up" is clicked ===
         signUpPrompt.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            Intent intent = new Intent(ActivityLogin.this, ActivityRegister.class);
             startActivity(intent);
         });
 

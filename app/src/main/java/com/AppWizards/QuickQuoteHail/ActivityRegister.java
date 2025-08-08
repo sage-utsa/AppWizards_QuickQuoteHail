@@ -14,7 +14,7 @@ import models.AuthManager;
  * Handles user registration for QuickQuoteHail.
  * Beginner-friendly MVC: delegates credential storage to models.AuthManager.
  */
-public class RegisterActivity extends AppCompatActivity {
+public class ActivityRegister extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

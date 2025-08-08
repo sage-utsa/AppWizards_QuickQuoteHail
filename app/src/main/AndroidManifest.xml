@@ -14,7 +14,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".ActivityLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +22,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ActivityRegister" />
 
-        <activity android:name=".DashboardActivity" />
+        <activity android:name=".ActivityDashboard" />
 
         <activity android:name=".ActivityCalculator" />
 
