@@ -56,7 +56,7 @@ public class CalculatorTest {
     @Test
     public void test_out_of_range_dent_count() {
         Calculator calculator = new Calculator();
-        String cost = calculator.getEstimatedCost("HOOD", "D", 1_000_000, false);
+        String cost = calculator.getEstimatedCost("HOOD", "D", 1000000, false);
         assertTrue(cost.startsWith("N/A"));
     }
 }
