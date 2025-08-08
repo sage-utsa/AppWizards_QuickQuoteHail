@@ -11,7 +11,7 @@ Created by **Team AppWizards**
 ## Motivation
 QuickQuoteHail was created to simplify the process of estimating hail damage for auto repair technicians. 
 The app provides an efficient way to record panel damage, calculate costs, and generate professional invoices, all without needing internet access.
-Our goal is to make quoting fast, accurate, and stress-free.
+Our goal is to make quoting fast, accurate, and stress free.
 
 ---
 
@@ -27,13 +27,15 @@ QuickQuoteHail is fully functional and stable. Additional enhancements may be ex
 
 ---
 
-## Architecture Diagram
+## Architecture Diagram (UML)
 
 <img src="QuickQuoteHail_UML.svg" alt="QuickQuoteHail UML Diagram" width="1000"/>
 
-This UML diagram illustrates the main components of QuickQuoteHail and how the Model–View–Controller architecture is applied.
+This UML diagram illustrates the main components of QuickQuoteHail and how the Model View Controller architecture is applied.
 
+> **Note:** For best clarity, right-click and open the image in a new tab/window.
 ---
+
 
 ## Video Demonstration
  [Watch the demo](https://drive.google.com/file/d/1E0CWEUIhW-4bnAReD1ggmaGIQpnurovc/view?usp=drive_link)
@@ -46,7 +48,6 @@ This UML diagram illustrates the main components of QuickQuoteHail and how the M
 - **Adobe XD** for app design
 - **GitHub** for version control
 - **Google Drive** for shared assets
-- **Group Chat/Instagram** for team communication
 
 ---
 
