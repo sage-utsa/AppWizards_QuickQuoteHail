@@ -72,7 +72,6 @@ public double calculateTotalCost(Panel panel) {
 
 ## Installation
 
-
 ### Requirements
 - Android Studio (Giraffe or newer)
 - Java SDK 17+
