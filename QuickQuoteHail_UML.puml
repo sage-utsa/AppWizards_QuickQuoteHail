@@ -1,5 +1,3 @@
-plantuml -tsvg QuickQuoteHail.puml
-
 @startuml
 skinparam style strictuml
 hide empty fields
@@ -84,9 +82,9 @@ package com.AppWizards.QuickQuoteHail <<Controller/View>> {
 
   ' Keep controllers aligned
   together {
-    class LoginActivity
-    class RegisterActivity
-    class DashboardActivity
+    class ActivityLogin
+    class ActivityRegister
+    class ActivityDashboard
   }
 
   class ActivityCalculator {
@@ -128,12 +126,12 @@ package com.AppWizards.QuickQuoteHail <<Controller/View>> {
   CustomerGroupAdapter --> OnEmailInvoiceClickListener
   PdfGenerator --> models.CustomerInvoiceSummary
 
-  ' Auth flow (new)
-  LoginActivity --> models.AuthManager
-  RegisterActivity --> models.AuthManager
+  ' Auth flow
+  ActivityLogin --> models.AuthManager
+  ActivityRegister --> models.AuthManager
 
-  ' Optional: show Dashboard touching the model (e.g., counts/stats)
-  DashboardActivity --> models.InvoiceManager
+  ' Dashboard touches the model (e.g., counts/stats)
+  ActivityDashboard --> models.InvoiceManager
 }
 
 @enduml
